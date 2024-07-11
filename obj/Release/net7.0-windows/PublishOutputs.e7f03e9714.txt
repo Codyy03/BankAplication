@@ -1,0 +1,5 @@
+C:\Users\sebas\Desktop\gry\Projekt.exe
+C:\Users\sebas\Desktop\gry\Projekt.dll
+C:\Users\sebas\Desktop\gry\Projekt.deps.json
+C:\Users\sebas\Desktop\gry\Projekt.runtimeconfig.json
+C:\Users\sebas\Desktop\gry\Projekt.pdb

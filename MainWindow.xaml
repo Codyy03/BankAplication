@@ -1,0 +1,31 @@
+﻿<Window x:Class="Projekt.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Projekt"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+
+    <Grid  Style="{StaticResource GridBackground}">
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Height="415" Width="Auto">
+            <TextBlock x:Name="zaloguj" TextWrapping="Wrap" Text="Zaloguj się" RenderTransformOrigin="0.467,-0.875" Height="59" Width="215" FontSize="40" FontWeight="Bold" TextAlignment="Center" Margin="15px" Background="Transparent" Foreground="White"/>
+            <TextBlock  Text="Nazwa użytkownika:" FontSize="20"  Style="{StaticResource LoginTexts}"/>
+
+            <TextBox   Style="{StaticResource LoginBoxes}"  />
+            <TextBlock Text="Hasło:"  FontSize="20"  Style="{StaticResource LoginTexts}" />
+
+            <PasswordBox Style="{StaticResource LoginPasswordBoxes}"/>
+            <Button x:Name="loginButton"  Width="122" Margin="25px" Height="32"   Content="Zaloguj" Style="{StaticResource LoginButtonStyle}"  >
+
+            </Button>
+            <TextBlock  FontSize="20px"  Text="Stwórz konto" Style="{StaticResource LoginTexts}"/>
+            <Button x:Name="backToRegistracion"  Width="117" Height="31"   Content="Rejestracja" Style="{StaticResource LoginButtonStyle}" RenderTransformOrigin="0.523,-0.31" Click="backToRegistracion_Click" />
+
+        </StackPanel>
+        <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="627,234,0,0" VerticalAlignment="Top" Foreground="White" Width="85"/>
+
+    </Grid>
+</Window>
