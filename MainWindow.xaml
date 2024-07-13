@@ -7,20 +7,26 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
-
+    <!-- Main Window Layout -->
     <Grid  Style="{StaticResource GridBackground}">
 
+        <!-- Wyśrodkowanie elementów interface'u w jednej kolumnie-->
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Height="415" Width="Auto">
+           <!--Nagłówek logowania-->
             <TextBlock x:Name="zaloguj" TextWrapping="Wrap" Text="Zaloguj się" RenderTransformOrigin="0.467,-0.875" Height="59" Width="215" FontSize="40" FontWeight="Bold" TextAlignment="Center" Margin="15px" Background="Transparent" Foreground="White"/>
+          
+            <!-- Login label i textbox-->
             <TextBlock  Text="Nazwa użytkownika:" FontSize="20"  Style="{StaticResource LoginTexts}"/>
-
             <TextBox x:Name="loginField"   Style="{StaticResource LoginBoxes}"  />
+
+            <!-- Hasło label i textbox-->
             <TextBlock Text="Hasło:"  FontSize="20"  Style="{StaticResource LoginTexts}" />
-
             <PasswordBox x:Name="PasswordField" Style="{StaticResource LoginPasswordBoxes}"/>
-            <Button x:Name="loginButton"  Width="122" Margin="25px" Height="32"   Content="Zaloguj" Style="{StaticResource LoginButtonStyle}" Click="loginButton_Click"  >
-
-            </Button>
+         
+            <!--Przycisk zaloguj -->
+            <Button x:Name="loginButton"  Width="122" Margin="25px" Height="32"   Content="Zaloguj" Style="{StaticResource LoginButtonStyle}" Click="loginButton_Click" ></Button>
+          
+            <!--tekst rejestracji i przycisk -->
             <TextBlock  FontSize="20px"  Text="Stwórz konto" Style="{StaticResource LoginTexts}"/>
             <Button x:Name="backToRegistracion"  Width="117" Height="31"   Content="Rejestracja" Style="{StaticResource LoginButtonStyle}" RenderTransformOrigin="0.523,-0.31" Click="backToRegistracion_Click" />
 

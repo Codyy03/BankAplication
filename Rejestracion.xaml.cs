@@ -44,7 +44,7 @@ namespace Projekt
         private void RejestracionAttempt_Click(object sender, RoutedEventArgs e)
         {
             DatabaseManager databaseManager = new DatabaseManager(connectionString);
-            string login = "SELECT login FROM \"Klienci\" Where login = " + "'" + RegistracionUserName.Text + "'";
+            string login = "SELECT login FROM klienci Where login = " + "'" + RegistracionUserName.Text + "'";
 
 
             // zabezpieczenia przed niepoprawnymi danymi wprowadzonymi przez użytkownika.
@@ -86,7 +86,7 @@ namespace Projekt
                 return;
             }
             // wyslij dane do bazy danych jezeli są poprawne
-            string newUser = $@"INSERT INTO ""Klienci"" (imie, nazwisko,login,haslo) VALUES('{RegistracionName.Text}','{RegistracionLastName.Text}','{RegistracionUserName.Text}','{RegistracionPassword.Password}') ";
+            string newUser = $@"INSERT INTO klienci (imie, nazwisko,login,haslo) VALUES('{RegistracionName.Text}','{RegistracionLastName.Text}','{RegistracionUserName.Text}','{RegistracionPassword.Password}') ";
 
             databaseManager.InsertData(newUser);
             ChangeSceneToLogin();

@@ -12,6 +12,12 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="251*"/>
         </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="158,22,0,0" TextWrapping="Wrap" Text="Imie" VerticalAlignment="Top" Width="148" Foreground="White" TextAlignment="Center"/>
+        <StackPanel Grid.Column="2" Margin="2,162,832,0">
+            <TextBlock TextWrapping="Wrap" Text="Aktualne saldo" Foreground="White"/>
+            <TextBlock TextWrapping="Wrap" Text="6000" Foreground="White"/>
+        </StackPanel>
+
 
     </Grid>
 </Window>

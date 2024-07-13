@@ -61,8 +61,8 @@ namespace Projekt
       
             DatabaseManager databaseManager = new DatabaseManager(connectionString);
 
-            string login = "SELECT login FROM \"Klienci\" Where login = " + "'"+loginField.Text+"'";
-            string password = "SELECT haslo FROM \"Klienci\" Where haslo = " + "'" + PasswordField.Password + "'";
+            string login = "SELECT login FROM klienci Where login = " + "'"+loginField.Text+"'";
+            string password = "SELECT haslo FROM klienci Where haslo = " + "'" + PasswordField.Password + "'";
             // jezeli wartości wpisane przez użytkownika są w bazie danych przejdz do głównego okna aplikacji
             if (databaseManager.CheckIfValueExistInDataBase(login) && databaseManager.CheckIfValueExistInDataBase(password))
                 label.Content = "Tak";

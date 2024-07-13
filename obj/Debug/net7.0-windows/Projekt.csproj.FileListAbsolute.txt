@@ -29,3 +29,5 @@ C:\Users\sebas\Desktop\Projekt\bin\Debug\net7.0-windows\Microsoft.Extensions.Log
 C:\Users\sebas\Desktop\Projekt\bin\Debug\net7.0-windows\Npgsql.dll
 C:\Users\sebas\Desktop\Projekt\obj\Debug\net7.0-windows\Projekt.csproj.CopyComplete
 C:\Users\sebas\Desktop\Projekt\obj\Debug\net7.0-windows\Style\Style.baml
+C:\Users\sebas\Desktop\Projekt\obj\Debug\net7.0-windows\Bank.g.cs
+C:\Users\sebas\Desktop\Projekt\obj\Debug\net7.0-windows\Bank.baml
