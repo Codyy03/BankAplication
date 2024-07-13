@@ -125,7 +125,7 @@ namespace Projekt {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Projekt;component/rejestracion.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Projekt;V1.0.0.0;component/rejestracion.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\Rejestracion.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

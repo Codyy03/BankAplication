@@ -47,7 +47,7 @@ namespace Projekt
             string login = "SELECT login FROM \"Klienci\" Where login = " + "'" + RegistracionUserName.Text + "'";
 
 
-
+            // zabezpieczenia przed niepoprawnymi danymi wprowadzonymi przez użytkownika.
             if (StringIsNull(RegistracionName.Text))
             {
                 RegistracionError.Text = "Imie nie może być puste";
@@ -85,17 +85,17 @@ namespace Projekt
                 DisableText();
                 return;
             }
-
+            // wyslij dane do bazy danych jezeli są poprawne
             string newUser = $@"INSERT INTO ""Klienci"" (imie, nazwisko,login,haslo) VALUES('{RegistracionName.Text}','{RegistracionLastName.Text}','{RegistracionUserName.Text}','{RegistracionPassword.Password}') ";
 
             databaseManager.InsertData(newUser);
             ChangeSceneToLogin();
            
         }
-
+        //sprawdz czy string jest pusty lub null
         bool StringIsNull(string text)
         {
-
+            
             if (string.IsNullOrEmpty(text))
             {
                 DisableText();
@@ -110,13 +110,14 @@ namespace Projekt
         {
             await DisableErrorMessage();
         }
+        //poczekaj 10 sekund do wyłączenia komunikatu błędu
         async Task DisableErrorMessage()
         {
             await Task.Delay(10000);
             RegistracionError.Text = "";
         }
 
-
+        // zmienia otwarte okno na logowanie
         void ChangeSceneToLogin()
         {
             MainWindow mainWindow = new MainWindow();
