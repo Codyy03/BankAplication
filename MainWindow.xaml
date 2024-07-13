@@ -14,11 +14,11 @@
             <TextBlock x:Name="zaloguj" TextWrapping="Wrap" Text="Zaloguj się" RenderTransformOrigin="0.467,-0.875" Height="59" Width="215" FontSize="40" FontWeight="Bold" TextAlignment="Center" Margin="15px" Background="Transparent" Foreground="White"/>
             <TextBlock  Text="Nazwa użytkownika:" FontSize="20"  Style="{StaticResource LoginTexts}"/>
 
-            <TextBox   Style="{StaticResource LoginBoxes}"  />
+            <TextBox x:Name="loginField"   Style="{StaticResource LoginBoxes}"  />
             <TextBlock Text="Hasło:"  FontSize="20"  Style="{StaticResource LoginTexts}" />
 
-            <PasswordBox Style="{StaticResource LoginPasswordBoxes}"/>
-            <Button x:Name="loginButton"  Width="122" Margin="25px" Height="32"   Content="Zaloguj" Style="{StaticResource LoginButtonStyle}"  >
+            <PasswordBox x:Name="PasswordField" Style="{StaticResource LoginPasswordBoxes}"/>
+            <Button x:Name="loginButton"  Width="122" Margin="25px" Height="32"   Content="Zaloguj" Style="{StaticResource LoginButtonStyle}" Click="loginButton_Click"  >
 
             </Button>
             <TextBlock  FontSize="20px"  Text="Stwórz konto" Style="{StaticResource LoginTexts}"/>
@@ -26,6 +26,7 @@
 
         </StackPanel>
         <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="627,234,0,0" VerticalAlignment="Top" Foreground="White" Width="85"/>
+       
 
     </Grid>
 </Window>

@@ -20,7 +20,6 @@ C:\Users\sebas\Desktop\Projekt\obj\Debug\net7.0-windows\Projekt.pdb
 C:\Users\sebas\Desktop\Projekt\obj\Debug\net7.0-windows\Projekt.genruntimeconfig.cache
 C:\Users\sebas\Desktop\Projekt\obj\Debug\net7.0-windows\ref\Projekt.dll
 C:\Users\sebas\Desktop\Projekt\obj\Debug\net7.0-windows\Projekt_Content.g.cs
-C:\Users\sebas\Desktop\Projekt\obj\Debug\net7.0-windows\Style.baml
 C:\Users\sebas\Desktop\Projekt\obj\Debug\net7.0-windows\App.baml
 C:\Users\sebas\Desktop\Projekt\obj\Debug\net7.0-windows\Rejestracion.g.cs
 C:\Users\sebas\Desktop\Projekt\obj\Debug\net7.0-windows\Rejestracion.baml
@@ -29,3 +28,4 @@ C:\Users\sebas\Desktop\Projekt\bin\Debug\net7.0-windows\Microsoft.Extensions.Dep
 C:\Users\sebas\Desktop\Projekt\bin\Debug\net7.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\sebas\Desktop\Projekt\bin\Debug\net7.0-windows\Npgsql.dll
 C:\Users\sebas\Desktop\Projekt\obj\Debug\net7.0-windows\Projekt.csproj.CopyComplete
+C:\Users\sebas\Desktop\Projekt\obj\Debug\net7.0-windows\Style\Style.baml

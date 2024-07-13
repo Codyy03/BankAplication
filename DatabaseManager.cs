@@ -5,7 +5,9 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using Npgsql;
+using NpgsqlTypes;
 
 namespace Projekt
 {
@@ -31,6 +33,7 @@ namespace Projekt
 
         public List<string> ExecuteQueryToStringList(string query)
         {
+
             List<string> list = new List<string>();
 
             using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
@@ -51,7 +54,36 @@ namespace Projekt
             return list;
 
         }
-    }
 
+        public bool CheckIfValueExistInDataBase(string query)
+        {
+
+            using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
+            {
+                conn.Open();
+                using (NpgsqlCommand cmd = new NpgsqlCommand(query, conn))
+                {
+                    using (NpgsqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        // Jeśli jest jakiś wiersz, to wartość istnieje
+                        return reader.HasRows;
+                      
+                    }
+                }
+            }
+        }
+
+        public void InsertData(string query)
+        {
+            using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
+            {
+                conn.Open();
+                using (NpgsqlCommand cmd = new NpgsqlCommand(query, conn))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+    }
 }
 

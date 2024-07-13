@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
@@ -24,23 +26,23 @@ namespace Projekt
     public partial class MainWindow : Window
     {
         string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-       
+
         public MainWindow()
         {
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            LoadData();
+           
         }
 
         private void backToRegistracion_Click(object sender, RoutedEventArgs e)
         {
             Rejestracion rejestracionWiondw = new Rejestracion();
             MainWindow loginWindow = new MainWindow();
-          
+
             this.Close();
             rejestracionWiondw.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
-            rejestracionWiondw.Closed += (s, args) => Application.Current.Shutdown();
+          //  rejestracionWiondw.Closed += (s, args) => Application.Current.Shutdown();
             rejestracionWiondw.Show();
 
         }
@@ -53,16 +55,25 @@ namespace Projekt
             }
         }
 
-        private void LoadData()
+        private void LoginAttempt()
         {
             DatabaseManager databaseManager = new DatabaseManager(connectionString);
-            string query = "SELECT imie FROM pracownicy"; // Zmień na swoje zapytanie
-                                                          //  DataTable data = databaseManager.ExecuteQuery(query);
-            label.Content = databaseManager.ExecuteQueryToStringList(query)[0];
+            string login = "SELECT login FROM \"Klienci\" Where login = " + "'"+loginField.Text+"'";
+            string password = "SELECT haslo FROM \"Klienci\" Where haslo = " + "'" + PasswordField.Password + "'";
 
+            if (databaseManager.CheckIfValueExistInDataBase(login) && databaseManager.CheckIfValueExistInDataBase(password))
+                label.Content = "Tak";
+            else label.Content = "ne";
 
 
 
         }
+
+        private void loginButton_Click(object sender, RoutedEventArgs e)
+        {
+            LoginAttempt();
+
+        }
+
     }
 }

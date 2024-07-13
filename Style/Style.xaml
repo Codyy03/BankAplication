@@ -53,7 +53,14 @@
         <Setter Property="Foreground" Value="#CCFFFFFF" />
     </Style>
 
+    <Style  x:Key="RegistracionError" TargetType="TextBlock">
 
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="FontWeight" Value="DemiBold" />
+        <Setter Property="Margin" Value="6px" />
+        <Setter Property="Foreground" Value="Red" />
+    </Style>
     <Style  x:Key="LoginBoxes" TargetType="TextBox">
 
         <Setter Property="HorizontalAlignment" Value="Center" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Projekt
 {
@@ -19,6 +21,7 @@ namespace Projekt
     /// </summary>
     public partial class Rejestracion : Window
     {
+        string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         public Rejestracion()
         {
             InitializeComponent();
@@ -30,6 +33,97 @@ namespace Projekt
             {
                 e.Handled = true; // Ignorowanie wprowadzonego tekstu, jeśli nie jest literą
             }
+        }
+
+     
+        private void backToLogin_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeSceneToLogin();
+        }
+
+        private void RejestracionAttempt_Click(object sender, RoutedEventArgs e)
+        {
+            DatabaseManager databaseManager = new DatabaseManager(connectionString);
+            string login = "SELECT login FROM \"Klienci\" Where login = " + "'" + RegistracionUserName.Text + "'";
+
+
+
+            if (StringIsNull(RegistracionName.Text))
+            {
+                RegistracionError.Text = "Imie nie może być puste";
+                return;
+            }
+
+            if (StringIsNull(RegistracionLastName.Text))
+            {
+                RegistracionError.Text = "Nazwisko nie może być puste";
+                return;
+            }
+
+            if (StringIsNull(RegistracionUserName.Text))
+            {
+                RegistracionError.Text = "Login nie może być pusty";
+                return;
+            }
+
+            if (StringIsNull(RegistracionPassword.Password))
+            {
+                RegistracionError.Text = "Hasło nie może być puste";
+                return;
+            }
+
+            if (databaseManager.CheckIfValueExistInDataBase(login))
+            {
+                RegistracionError.Text = "Login jest zajety";
+                DisableText();
+                return;
+            }
+
+            if (RegistracionPassword.Password != RegistracionRepetdPassword.Password)
+            {
+                RegistracionError.Text = "Hasła nie są takie same";
+                DisableText();
+                return;
+            }
+
+            string newUser = $@"INSERT INTO ""Klienci"" (imie, nazwisko,login,haslo) VALUES('{RegistracionName.Text}','{RegistracionLastName.Text}','{RegistracionUserName.Text}','{RegistracionPassword.Password}') ";
+
+            databaseManager.InsertData(newUser);
+            ChangeSceneToLogin();
+           
+        }
+
+        bool StringIsNull(string text)
+        {
+
+            if (string.IsNullOrEmpty(text))
+            {
+                DisableText();
+                return true;
+            }
+
+            return false;
+
+        }
+
+        async void DisableText()
+        {
+            await DisableErrorMessage();
+        }
+        async Task DisableErrorMessage()
+        {
+            await Task.Delay(10000);
+            RegistracionError.Text = "";
+        }
+
+
+        void ChangeSceneToLogin()
+        {
+            MainWindow mainWindow = new MainWindow();
+
+            this.Close();
+            mainWindow.Show();
+
         }
     }
 }
