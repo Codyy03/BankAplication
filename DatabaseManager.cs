@@ -31,10 +31,9 @@ namespace Projekt
             }
         }
 
-        public List<string> ExecuteQueryToStringList(string query)
+        public List<T> ExecuteQueryToList<T>(string query)
         {
-
-            List<string> list = new List<string>();
+            List<T> list = new List<T>();
 
             using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
             {
@@ -45,14 +44,13 @@ namespace Projekt
                     {
                         while (reader.Read())
                         {
-                            list.Add(reader[0].ToString());
+                            list.Add((T)reader[0]);
                         }
                     }
                 }
             }
 
             return list;
-
         }
 
         public bool CheckIfValueExistInDataBase(string query)
@@ -68,6 +66,28 @@ namespace Projekt
                         // Jeśli jest jakiś wiersz, to wartość istnieje
                         return reader.HasRows;
                       
+                    }
+                }
+            }
+        }
+        public string ReturnSingleQueryValue(string query)
+        {
+            using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
+            {
+                conn.Open();
+                using (NpgsqlCommand cmd = new NpgsqlCommand(query, conn))
+                {
+                    using (NpgsqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return reader[0].ToString();
+                        }
+                        else
+                        {
+                            // Brak wyników, zwróć null lub odpowiednią wartość domyślną
+                            return null;
+                        }
                     }
                 }
             }

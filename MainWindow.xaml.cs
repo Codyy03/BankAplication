@@ -25,6 +25,7 @@ namespace Projekt
     /// </summary>
     public partial class MainWindow : Window
     {
+        private string currentUserName="";
         string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
         public MainWindow()
@@ -60,14 +61,17 @@ namespace Projekt
         {
       
             DatabaseManager databaseManager = new DatabaseManager(connectionString);
-
-            string login = "SELECT login FROM klienci Where login = " + "'"+loginField.Text+"'";
-            string password = "SELECT haslo FROM klienci Where haslo = " + "'" + PasswordField.Password + "'";
+            string login = "SELECT login FROM klienci Where login = " + "'"+loginField.Text+"' AND haslo = " + "'" + PasswordField.Password + "'";
+          //  string password = "SELECT haslo FROM klienci Where haslo = " + "'" + PasswordField.Password + "'";
             // jezeli wartości wpisane przez użytkownika są w bazie danych przejdz do głównego okna aplikacji
-            if (databaseManager.CheckIfValueExistInDataBase(login) && databaseManager.CheckIfValueExistInDataBase(password))
-                label.Content = "Tak";
-            else label.Content = "ne";
-
+         
+            if (databaseManager.CheckIfValueExistInDataBase(login))
+            {
+                currentUserName = databaseManager.ReturnSingleQueryValue("SELECT imie FROM klienci Where login = " + "'" + loginField.Text + "'");
+                Bank bank = new Bank(currentUserName, loginField.Text);
+                this.Close();
+                bank.Show();
+            }
 
 
         }
@@ -78,5 +82,9 @@ namespace Projekt
             LoginAttempt();
         }
 
+        public string GetCurrentUserName()
+        {
+            return currentUserName;
+        }
     }
 }
