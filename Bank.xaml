@@ -12,12 +12,13 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="251*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock x:Name="NameInBankScene" Grid.Column="2" HorizontalAlignment="Left" Margin="158,22,0,0" TextWrapping="Wrap" Text="Imie" VerticalAlignment="Top" Width="148" Foreground="White" TextAlignment="Center" FontSize="20"  Style="{StaticResource LoginTexts}"/>
-        <StackPanel Grid.Column="2" Margin="2,82,832,45">
+        <TextBlock x:Name="NameInBankScene" Grid.Column="2" HorizontalAlignment="Left" Margin="408,27,0,0" TextWrapping="Wrap" Text="Imie" VerticalAlignment="Top" Width="180" Foreground="White" TextAlignment="Center" FontSize="25"  Style="{StaticResource LoginTexts}" Height="34"/>
+        <StackPanel Grid.Column="2" Margin="32,82,784,45">
             <TextBlock TextWrapping="Wrap" Text="Aktualne saldo" FontSize="20"  Style="{StaticResource LoginTexts}"/>
             <TextBlock x:Name="BankBalance" TextWrapping="Wrap" Text="6000" FontSize="20"  Style="{StaticResource LoginTexts}" Foreground="#CCFFFFFF" />
             <ListBox x:Name="MoneyList" Height="392" d:ItemsSource="{d:SampleData ItemCount=5}" Foreground="White" Background="#FF232323" FontSize="14" BorderBrush="White"/>
         </StackPanel>
+
 
 
     </Grid>

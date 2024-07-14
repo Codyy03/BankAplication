@@ -30,15 +30,17 @@ namespace Projekt
             // Inicjalizacja listy przechowującej transakcje
             List<string> transactions = new List<string>();
             List<DateTime> transactionDates = new List<DateTime>();
-            transactions.Add("Historia tranzakcji");
+            transactions.Add("Historia tranzakcji:");
             InitializeComponent();
 
-            NameInBankScene.Text = currentUserName;
             DatabaseManager databaseManager = new DatabaseManager(connectionString);
 
             // zapytanie SQL pobierające aktualne saldo.
             string bankBalance = $@"SELECT saldo FROM konto WHERE klient= '{login}'";
+            string lastNameQuery = $@"SELECT nazwisko FROM klienci WHERE login = '{login}'";
 
+            NameInBankScene.Text = currentUserName+" " + databaseManager.ReturnSingleQueryValue(lastNameQuery);
+            
             // Zapytanie SQL łączące wpłaty i wypłaty
             string transactionsQuery = $@"
             SELECT wplata.data_wplaty AS data, wplata.kwota AS kwota, 'wplata' AS typ
