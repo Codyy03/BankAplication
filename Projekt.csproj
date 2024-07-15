@@ -21,9 +21,4 @@
     <PackageReference Include="Npgsql" Version="8.0.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Resource Include="bank.png" />
-    <Resource Include="finance.jpg" />
-  </ItemGroup>
-
 </Project>

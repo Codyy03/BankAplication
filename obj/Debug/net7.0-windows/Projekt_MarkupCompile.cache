@@ -9,12 +9,12 @@ Projekt
 none
 false
 TRACE;DEBUG;NET;NET7_0;NETCOREAPP
-C:\Users\sebas\Desktop\Projekt\App.xaml
-4-793363980
-11987258329
-61283121953
-2011696989031
-Bank.xaml;MainWindow.xaml;Rejestracion.xaml;Style\Style.xaml;
 
-False
+5-1554930705
+11987258329
+6899616783
+2011696989031
+Style\Style.xaml;xaml\App.xaml;xaml\Bank.xaml;xaml\MainWindow.xaml;xaml\Rejestracion.xaml;
+
+True
 
