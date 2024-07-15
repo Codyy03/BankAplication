@@ -12,13 +12,35 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="251*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock x:Name="NameInBankScene" Grid.Column="2" HorizontalAlignment="Left" Margin="408,27,0,0" TextWrapping="Wrap" Text="Imie" VerticalAlignment="Top" Width="180" Foreground="White" TextAlignment="Center" FontSize="25"  Style="{StaticResource LoginTexts}" Height="34"/>
-        <StackPanel Grid.Column="2" Margin="32,82,784,45">
+        <!-- Tytuł sceny-->
+        <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="382,21,0,0" TextWrapping="Wrap" Text="BANK" VerticalAlignment="Top" Width="232" Foreground="White" TextAlignment="Center" FontSize="25"  Style="{StaticResource LoginTexts}" Height="34" FontWeight="Bold"/>
+      
+        <StackPanel Grid.Column="2" Margin="32,109,784,12">
+            <!-- Aktualne saldo tytuł label-->
             <TextBlock TextWrapping="Wrap" Text="Aktualne saldo" FontSize="20"  Style="{StaticResource LoginTexts}"/>
+            <!-- Aktualne saldo label-->
             <TextBlock x:Name="BankBalance" TextWrapping="Wrap" Text="6000" FontSize="20"  Style="{StaticResource LoginTexts}" Foreground="#CCFFFFFF" />
+
+            <!-- Wpłaty i wypłaty listbox-->
             <ListBox x:Name="MoneyList" Height="392" d:ItemsSource="{d:SampleData ItemCount=5}" Foreground="White" Background="#FF232323" FontSize="14" BorderBrush="White"/>
         </StackPanel>
+        <!-- Zmiana sceny na logowanie przycisk-->
+        <Button x:Name="Logout" Grid.Column="2" Content="Wylgouj" HorizontalAlignment="Left" Margin="880,12,0,0" VerticalAlignment="Top" Height="52" Width="101"  Style="{StaticResource LoginButtonStyle}" Click="Logout_Click"/>
 
+
+        <!-- Obramówka danych użytkownika-->
+        <Border BorderBrush="White" BorderThickness="1" Grid.Column="2" Margin="792,184,10,8" Height="392">
+            <StackPanel Grid.Column="1" Margin="-1,0,0,0" >
+                <!-- Imie i nazwisko label-->
+                <TextBlock x:Name="NameInBankScene" Text="Piotr kowlaski" VerticalAlignment="Top" Width="192" Foreground="White" TextAlignment="Center" FontSize="25"  Style="{StaticResource LoginTexts}" Height="34"/>
+                <!-- Nick label-->
+                <TextBlock x:Name="UserNameInBankScene" Text="asd" VerticalAlignment="Top" Width="192" Foreground="White" TextAlignment="Center" FontSize="20"  Style="{StaticResource LoginTexts}" Height="34"/>
+                <!-- Data założenia konta label-->
+                <TextBlock x:Name="AccountDateInBankScene" Text="Data założenia konta: 05.01.2023" Width="192" Foreground="White" TextAlignment="Center" FontSize="15"  Style="{StaticResource LoginTexts}" Height="52"/>
+                <!-- Usun konto label-->
+                <Button x:Name="DeleteAccount" Content="Usuń konto"  Style="{StaticResource LoginButtonStyle}" Click="DeleteAccount_Click"/>
+            </StackPanel>
+        </Border>
 
 
     </Grid>

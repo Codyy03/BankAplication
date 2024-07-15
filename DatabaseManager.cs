@@ -20,6 +20,7 @@ namespace Projekt
             this.connectionString = connectionString;
         }
 
+        // zwraca całą tabelke danych z zapytania
         public DataTable ExecuteQuery(string query)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
@@ -31,6 +32,7 @@ namespace Projekt
             }
         }
 
+        // zwracaj liste dowolnej zmiennej z bazy danych 
         public List<T> ExecuteQueryToList<T>(string query)
         {
             List<T> list = new List<T>();
@@ -53,6 +55,7 @@ namespace Projekt
             return list;
         }
 
+        // sprawdza czy wartosc z zapytania istnieje
         public bool CheckIfValueExistInDataBase(string query)
         {
 
@@ -70,6 +73,7 @@ namespace Projekt
                 }
             }
         }
+        // zwraca pojedyńczą wartość z zapytania
         public string ReturnSingleQueryValue(string query)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
@@ -93,6 +97,7 @@ namespace Projekt
             }
         }
 
+        // pozwala zadawać zapytania do bazy danych nie zwracające nic. Np update, insert into
         public void InsertData(string query)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))

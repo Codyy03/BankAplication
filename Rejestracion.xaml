@@ -9,33 +9,38 @@
     <Grid Style="{StaticResource GridBackground}">
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Height="577" Width="Auto">
+            <!-- Tytuł sceny-->
             <TextBlock x:Name="RejestracionHeadline" TextWrapping="Wrap" Text="Rejestracja" RenderTransformOrigin="0.467,-0.875" Height="59" Width="215" FontSize="40" FontWeight="Bold" TextAlignment="Center" Margin="15px" Background="Transparent" Foreground="White"/>
 
-
+            <!--Imie label i textBox-->
             <TextBlock Text="Imię:"  FontSize="20"  Style="{StaticResource LoginTexts}" />
             <TextBox x:Name="RegistracionName" Style="{StaticResource LoginBoxes}" PreviewTextInput="RegistracionName_PreviewTextInput"  MaxLength="10" />
-
+            
+            <!--Nazwisko label i textBox-->
             <TextBlock Text="Nazwisko:"  FontSize="20"  Style="{StaticResource LoginTexts}" />
             <TextBox x:Name="RegistracionLastName"  Style="{StaticResource LoginBoxes}" PreviewTextInput="RegistracionName_PreviewTextInput" MaxLength="15"   />
+
+            <!--Login label i textBox-->
             <TextBlock  Text="Nazwa użytkownika:" FontSize="20"  Style="{StaticResource LoginTexts}"/>
-
             <TextBox x:Name="RegistracionUserName"   Style="{StaticResource LoginBoxes}" MaxLength="10" />
-            <TextBlock Text="Hasło:"  FontSize="20"  Style="{StaticResource LoginTexts}" />
 
+
+            <!--Hasło label i textBox-->
+            <TextBlock Text="Hasło:"  FontSize="20"  Style="{StaticResource LoginTexts}" />
             <PasswordBox x:Name="RegistracionPassword" Style="{StaticResource LoginPasswordBoxes}" MaxLength="10"/>
 
+            <!--Powtórz hasło label i textBox-->
             <TextBlock Text="Powtórz hasło:"  FontSize="20"  Style="{StaticResource LoginTexts}"   />
             <PasswordBox x:Name="RegistracionRepetdPassword" Style="{StaticResource LoginPasswordBoxes}" MaxLength="10"/>
 
+            <!--Możliwe błedy rejestracji label-->
             <TextBlock x:Name="RegistracionError" TextWrapping="Wrap" Text="" Style="{StaticResource RegistracionError}"/>
+            <!--Przycisk rejestracji-->
             <Button x:Name="RejestracionAttempt" Content="Zarejestruj się"  Style="{StaticResource LoginButtonStyle}" Margin="20px" Click="RejestracionAttempt_Click"/>
-
-
-
         </StackPanel>
+        
+        <!--Zmiana sceny na logowanie przysick-->
         <Button x:Name="backToLogin" Content="Zaloguj się" HorizontalAlignment="Left" Margin="654,27,0,0" VerticalAlignment="Top" Height="35" Width="122" Style="{StaticResource LoginButtonStyle}" Click="backToLogin_Click"/>
-
-
 
     </Grid>
 </Window>

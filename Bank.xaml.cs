@@ -23,24 +23,30 @@ namespace Projekt
     /// </summary>
     public partial class Bank : Window
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-
+       
+        DatabaseManager databaseManager = new DatabaseManager(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+        string login;
         public Bank(string currentUserName, string login)
         {
+            this.login = login;
             // Inicjalizacja listy przechowującej transakcje
             List<string> transactions = new List<string>();
             List<DateTime> transactionDates = new List<DateTime>();
             transactions.Add("Historia tranzakcji:");
             InitializeComponent();
 
-            DatabaseManager databaseManager = new DatabaseManager(connectionString);
+           
 
-            // zapytanie SQL pobierające aktualne saldo.
+            // zapytanie SQL pobierające aktualne wartosci zalogowanego.
             string bankBalance = $@"SELECT saldo FROM konto WHERE klient= '{login}'";
             string lastNameQuery = $@"SELECT nazwisko FROM klienci WHERE login = '{login}'";
+            string createdAccountDate = $@"SELECT data_zalozenia_konta FROM konto WHERE klient = '{login}'";
 
+            // wyswietlenie danych użytkownika
             NameInBankScene.Text = currentUserName+" " + databaseManager.ReturnSingleQueryValue(lastNameQuery);
-            
+            UserNameInBankScene.Text = login;
+            AccountDateInBankScene.Text ="Data założenia konta: "+ databaseManager.ReturnSingleQueryValue(createdAccountDate);
+
             // Zapytanie SQL łączące wpłaty i wypłaty
             string transactionsQuery = $@"
             SELECT wplata.data_wplaty AS data, wplata.kwota AS kwota, 'wplata' AS typ
@@ -72,6 +78,35 @@ namespace Projekt
 
             // Wyświetlanie w ListBox
             MoneyList.ItemsSource = transactions;
+        }
+
+        // wylogowanie
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+
+            mainWindow.Show();
+            this.Close();
+        }
+
+        // usuwa konto 
+        private void DeleteAccount_Click(object sender, RoutedEventArgs e)
+        {
+            // zapytania usuwające dane
+            string deleteAccoutnQuery = $@"DELETE FROM konto WHERE klient = '{login}'";
+            string deleteCustomerQuery =  $@"DELETE FROM klienci WHERE login = '{login}'";
+
+            // wywołanie zapytań
+            databaseManager.InsertData(deleteAccoutnQuery);
+            databaseManager.InsertData(deleteCustomerQuery);
+
+            // zmiana sceny
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();  
+            this.Close();
+
+
+
         }
     }
 }

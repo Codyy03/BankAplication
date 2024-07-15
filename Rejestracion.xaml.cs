@@ -85,10 +85,12 @@ namespace Projekt
                 DisableText();
                 return;
             }
+            DateTime currentDate = DateTime.Today;
             // wyslij dane do bazy danych jezeli są poprawne
             string newUser = $@"INSERT INTO klienci (imie, nazwisko,login,haslo) VALUES('{RegistracionName.Text}','{RegistracionLastName.Text}','{RegistracionUserName.Text}','{RegistracionPassword.Password}') ";
-
+            string newUserAccount = $@"INSERT INTO konto (klient,saldo,data_zalozenia_konta) VALUES('{RegistracionUserName.Text}',0,'{currentDate}')";
             databaseManager.InsertData(newUser);
+            databaseManager.InsertData(newUserAccount);
             ChangeSceneToLogin();
            
         }

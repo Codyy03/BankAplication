@@ -36,8 +36,9 @@ namespace Projekt
            
         }
 
+        // zmiena scene na rejestracje
         private void backToRegistracion_Click(object sender, RoutedEventArgs e)
-        {
+        {  
             Rejestracion rejestracionWiondw = new Rejestracion();
             MainWindow loginWindow = new MainWindow();
 
@@ -62,9 +63,8 @@ namespace Projekt
       
             DatabaseManager databaseManager = new DatabaseManager(connectionString);
             string login = "SELECT login FROM klienci Where login = " + "'"+loginField.Text+"' AND haslo = " + "'" + PasswordField.Password + "'";
-          //  string password = "SELECT haslo FROM klienci Where haslo = " + "'" + PasswordField.Password + "'";
+           
             // jezeli wartości wpisane przez użytkownika są w bazie danych przejdz do głównego okna aplikacji
-         
             if (databaseManager.CheckIfValueExistInDataBase(login))
             {
                 currentUserName = databaseManager.ReturnSingleQueryValue("SELECT imie FROM klienci Where login = " + "'" + loginField.Text + "'");
@@ -72,6 +72,8 @@ namespace Projekt
                 this.Close();
                 bank.Show();
             }
+            else LoginError.Text = "Login lub hasło są nieprawidłowe.";
+
 
 
         }
