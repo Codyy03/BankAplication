@@ -31,4 +31,3 @@ C:\Users\sebas\Desktop\Projekt\obj\Debug\net7.0-windows\XAML\Rejestracion.g.cs
 C:\Users\sebas\Desktop\Projekt\obj\Debug\net7.0-windows\XAML\Bank.baml
 C:\Users\sebas\Desktop\Projekt\obj\Debug\net7.0-windows\XAML\MainWindow.baml
 C:\Users\sebas\Desktop\Projekt\obj\Debug\net7.0-windows\XAML\Rejestracion.baml
-C:\Users\sebas\Desktop\Projekt\obj\Debug\net7.0-windows\xaml\App.g.cs

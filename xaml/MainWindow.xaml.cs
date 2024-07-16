@@ -23,6 +23,7 @@ namespace Projekt
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    ///  ta klasa reprezentuje wszystkie funkcjolaności sceny 'logowanie'
     public partial class MainWindow : Window
     {
         private string currentUserName="";
@@ -67,7 +68,7 @@ namespace Projekt
             // jezeli wartości wpisane przez użytkownika są w bazie danych przejdz do głównego okna aplikacji
             if (databaseManager.CheckIfValueExistInDataBase(login))
             {
-                currentUserName = databaseManager.ReturnSingleQueryValue("SELECT imie FROM klienci Where login = " + "'" + loginField.Text + "'");
+                currentUserName = databaseManager.ReturnSingleQueryValue<string>("SELECT imie FROM klienci Where login = " + "'" + loginField.Text + "'");
                 Bank bank = new Bank(currentUserName, loginField.Text);
                 this.Close();
                 bank.Show();

@@ -81,5 +81,38 @@
         <Setter Property="Height" Value="28" />
 
     </Style>
+
+    <Style  x:Key="BankButtons" TargetType="Button">
+
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Height" Value="46" />
+        <Setter Property="Width" Value="112" />
+        <Setter Property="Background" Value="#FF232323" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="BorderBrush" Value="Black" />
+
+
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="1">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <!-- Trigger na MouseEnter -->
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FF000000" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+   
+
 </ResourceDictionary>
 

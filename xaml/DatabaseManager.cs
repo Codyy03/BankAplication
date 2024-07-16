@@ -11,6 +11,7 @@ using NpgsqlTypes;
 
 namespace Projekt
 {
+    // klasa odpowiedzialna za łączenie sie z bazą danych
     internal class DatabaseManager
     {
         private string connectionString;
@@ -74,7 +75,7 @@ namespace Projekt
             }
         }
         // zwraca pojedyńczą wartość z zapytania
-        public string ReturnSingleQueryValue(string query)
+        public T ReturnSingleQueryValue<T>(string query)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
             {
@@ -85,12 +86,12 @@ namespace Projekt
                     {
                         if (reader.Read())
                         {
-                            return reader[0].ToString();
+                            return (T)reader[0];
                         }
                         else
                         {
                             // Brak wyników, zwróć null lub odpowiednią wartość domyślną
-                            return null;
+                            return default(T);
                         }
                     }
                 }

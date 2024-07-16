@@ -21,31 +21,55 @@ namespace Projekt
     /// <summary>
     /// Logika interakcji dla klasy Bank.xaml
     /// </summary>
+    /// ta klasa reprezentuje wszystkie funkcjolaności sceny 'Bank'
     public partial class Bank : Window
     {
        
         DatabaseManager databaseManager = new DatabaseManager(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
         string login;
+        decimal accountId;
+        double bankBalanceValue;
         public Bank(string currentUserName, string login)
         {
             this.login = login;
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            InitializeComponent();
+
+            // zapytanie SQL pobierające aktualne wartosci zalogowanego.
+            string lastNameQuery = $@"SELECT nazwisko FROM klienci WHERE login = '{login}'";
+            string createdAccountDate = $@"SELECT data_zalozenia_konta FROM konto WHERE klient = '{login}'";
+            string accountIdQuery = $@"SELECT id_klienta FROM konto WHERE klient = '{login}'";
+            // zapytanie pobierające saldo konta
+            string bankBalance = $@"SELECT saldo FROM konto WHERE klient= '{login}'";
+            accountId = databaseManager.ReturnSingleQueryValue<decimal>(accountIdQuery);
+
+            // wyswietlenie danych użytkownika
+            NameInBankScene.Text = currentUserName + " " + databaseManager.ReturnSingleQueryValue<string>(lastNameQuery);
+            UserNameInBankScene.Text = login;
+            AccountDateInBankScene.Text = "Data założenia konta: " + databaseManager.ReturnSingleQueryValue<DateTime>(createdAccountDate);
+
+            bankBalanceValue = databaseManager.ReturnSingleQueryValue<double>(bankBalance);
+            BankBalance.Text = bankBalanceValue.ToString(); // wyświetla aktualne saldo konta
+
+            DisplayCurrentAccountValues();
+
+            // ustawiwa maksumum slidera na stan konta
+            PayoutsSlider.Maximum = bankBalanceValue;
+        }
+
+        void UpdateBankAccount(double value)
+        {
+            bankBalanceValue += value;
+            BankBalance.Text = bankBalanceValue.ToString();
+            PayoutsSlider.Maximum = bankBalanceValue;
+        }
+        void DisplayCurrentAccountValues()
+        {
             // Inicjalizacja listy przechowującej transakcje
             List<string> transactions = new List<string>();
             List<DateTime> transactionDates = new List<DateTime>();
-            transactions.Add("Historia tranzakcji:");
-            InitializeComponent();
-
            
-
-            // zapytanie SQL pobierające aktualne wartosci zalogowanego.
-            string bankBalance = $@"SELECT saldo FROM konto WHERE klient= '{login}'";
-            string lastNameQuery = $@"SELECT nazwisko FROM klienci WHERE login = '{login}'";
-            string createdAccountDate = $@"SELECT data_zalozenia_konta FROM konto WHERE klient = '{login}'";
-
-            // wyswietlenie danych użytkownika
-            NameInBankScene.Text = currentUserName+" " + databaseManager.ReturnSingleQueryValue(lastNameQuery);
-            UserNameInBankScene.Text = login;
-            AccountDateInBankScene.Text ="Data założenia konta: "+ databaseManager.ReturnSingleQueryValue(createdAccountDate);
+            transactions.Add("Historia tranzakcji:");
 
             // Zapytanie SQL łączące wpłaty i wypłaty
             string transactionsQuery = $@"
@@ -58,7 +82,7 @@ namespace Projekt
             FROM konto
             INNER JOIN wyplata ON konto.id_klienta = wyplata.id_konta
             WHERE konto.klient = '{login}'
-            ORDER BY data";
+            ORDER BY data DESC";
 
             // Pobieranie danych z bazy
             var transactionsData = databaseManager.ExecuteQuery(transactionsQuery);
@@ -74,12 +98,14 @@ namespace Projekt
                 transactions.Add($"{date.ToString("dd-MM-yyyy")}: {formattedTransaction}"); // formatuje date dzien-miesiac-rok i łączy z kwotą która
             }
 
-            BankBalance.Text = databaseManager.ReturnSingleQueryValue(bankBalance); // wyświetla aktualne saldo konta
+
 
             // Wyświetlanie w ListBox
             MoneyList.ItemsSource = transactions;
-        }
 
+            
+
+        }
         // wylogowanie
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
@@ -107,6 +133,68 @@ namespace Projekt
 
 
 
+        }
+        // ustawia wartosc do wyplacenia
+        private void PayoutsSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (PayoutsValue != null) // Sprawdzenie, czy kontrolka PayoutsValue jest zainicjalizowana
+            {
+                int payoutAmount = (int)e.NewValue; // Konwersja wartości suwaka na int
+                PayoutsValue.Text = payoutAmount.ToString(); // Aktualizacja tekstu
+              
+            }
+        }
+
+        // wyplac pieniadze
+        private void PayoutMoneyButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (PayoutsSlider.Value == 0) // jezeli wartosc sildera jest 0 nie wykonuj funkcji
+                return;
+
+            // inincjalizacja zmiennych
+            double payoutAmount = (int)PayoutsSlider.Value;
+            DateTime todayDate = DateTime.Today;
+            // zapytanie tworzące wypłate
+            string userDepositMoneyQuery = $@"INSERT INTO wyplata (id_konta,kwota,data_wyplaty) VALUES({accountId},{payoutAmount},'{todayDate:yyyy-MM-dd}')";
+
+            databaseManager.InsertData(userDepositMoneyQuery);
+            
+            // aktualizacja danych 
+            DisplayCurrentAccountValues();
+            UpdateBankAccount(-payoutAmount);
+            string updateBankBalance = $@"UPDATE konto SET saldo = {bankBalanceValue} WHERE klient = '{login}'";
+            databaseManager.InsertData(updateBankBalance);
+
+        }
+        // wplac pieniadze 
+        private void DepositMoneyButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (DepositSlider.Value == 0) // jezeli wartosc sildera jest 0 nie wykonuj funkcji
+                return;
+
+            // inincjalizacja zmiennych
+            double depositAmount = (int)DepositSlider.Value;
+            DateTime todayDate = DateTime.Today;
+
+            // zapytanie tworzące wpłate
+            string userDepositMoneyQuery = $@"INSERT INTO wplata (id_konta,kwota,data_wplaty) VALUES({accountId},{depositAmount},'{todayDate:yyyy-MM-dd}')";
+            databaseManager.InsertData(userDepositMoneyQuery);
+
+            // aktualizacja danych 
+            DisplayCurrentAccountValues();
+            UpdateBankAccount(depositAmount);
+            string updateBankBalance = $@"UPDATE konto SET saldo = {bankBalanceValue} WHERE klient = '{login}'";
+            databaseManager.InsertData(updateBankBalance);
+        }
+
+        private void DepositSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (DepositSlider != null) // Sprawdzenie, czy kontrolka PayoutsValue jest zainicjalizowana
+            {
+                int depositAmount = (int)e.NewValue; // Konwersja wartości suwaka na int
+                DepositValue.Text = depositAmount.ToString(); // Aktualizacja tekstu
+
+            }
         }
     }
 }

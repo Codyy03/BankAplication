@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projekt"
         mc:Ignorable="d"
-        Title="Bank" Height="600" Width="1012">
+        Title="Bank" Height="600" Width="1012"
+        ResizeMode="NoResize">
     <Grid Style="{StaticResource GridBackground}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0*"/>
@@ -14,13 +15,8 @@
         </Grid.ColumnDefinitions>
         <!-- Tytuł sceny-->
         <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="382,21,0,0" TextWrapping="Wrap" Text="BANK" VerticalAlignment="Top" Width="232" Foreground="White" TextAlignment="Center" FontSize="25"  Style="{StaticResource LoginTexts}" Height="34" FontWeight="Bold"/>
-      
-        <StackPanel Grid.Column="2" Margin="32,109,784,12">
-            <!-- Aktualne saldo tytuł label-->
-            <TextBlock TextWrapping="Wrap" Text="Aktualne saldo" FontSize="20"  Style="{StaticResource LoginTexts}"/>
-            <!-- Aktualne saldo label-->
-            <TextBlock x:Name="BankBalance" TextWrapping="Wrap" Text="6000" FontSize="20"  Style="{StaticResource LoginTexts}" Foreground="#CCFFFFFF" />
 
+        <StackPanel Grid.Column="2" Margin="22,131,794,65">
             <!-- Wpłaty i wypłaty listbox-->
             <ListBox x:Name="MoneyList" Height="392" d:ItemsSource="{d:SampleData ItemCount=5}" Foreground="White" Background="#FF232323" FontSize="14" BorderBrush="White"/>
         </StackPanel>
@@ -29,7 +25,7 @@
 
 
         <!-- Obramówka danych użytkownika-->
-        <Border BorderBrush="White" BorderThickness="1" Grid.Column="2" Margin="792,184,10,8" Height="392">
+        <Border BorderBrush="White" BorderThickness="1" Grid.Column="2" Margin="782,131,20,61" Height="392">
             <StackPanel Grid.Column="1" Margin="-1,0,0,0" >
                 <!-- Imie i nazwisko label-->
                 <TextBlock x:Name="NameInBankScene" Text="Piotr kowlaski" VerticalAlignment="Top" Width="192" Foreground="White" TextAlignment="Center" FontSize="25"  Style="{StaticResource LoginTexts}" Height="34"/>
@@ -41,6 +37,31 @@
                 <Button x:Name="DeleteAccount" Content="Usuń konto"  Style="{StaticResource LoginButtonStyle}" Click="DeleteAccount_Click"/>
             </StackPanel>
         </Border>
+
+        <!--Wypłać pieniądze przycisk -->
+        <Button x:Name="PayoutMoneyButton" Grid.Column="2" Content="Wypłać pieniądze"  Margin="273,268,0,0" Style="{StaticResource BankButtons}" Click="PayoutMoneyButton_Click" />
+        <!--Ustaw wartość do wypłacenia slider -->
+        <Slider x:Name="PayoutsSlider" Grid.Column="2" HorizontalAlignment="Left" Margin="251,336,0,0" VerticalAlignment="Top" Width="156" Background="#00373737" Foreground="Black" Minimum="0" ValueChanged="PayoutsSlider_ValueChanged" Maximum="1000" BorderBrush="White"  />
+        <!--Aktualna wartość do wypłacenia label -->
+        <TextBlock x:Name="PayoutsValue" Grid.Column="2" HorizontalAlignment="Left" Margin="321,359,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Foreground="White" FontSize="15" FontWeight="DemiBold"/>
+
+
+        <Border BorderBrush="White" BorderThickness="1" Grid.Column="2" Margin="216,131,222,360">
+            <StackPanel Grid.Column="2">
+                <!-- Aktualne saldo tytuł label-->
+                <TextBlock TextWrapping="Wrap" Text="Aktualne saldo:" FontSize="20"  Style="{StaticResource LoginTexts}" Grid.Column="2"/>
+                <!-- Aktualne saldo label-->
+                <TextBlock x:Name="BankBalance" TextWrapping="Wrap" Text="6000" FontSize="20"  Style="{StaticResource LoginTexts}" Foreground="#CCFFFFFF" Grid.Column="2" RenderTransformOrigin="0.504,2.304" />
+            </StackPanel>
+        </Border>
+
+        <!--Wpłać pieniądze przycisk -->
+        <Button x:Name="DepositMoneyButton" Grid.Column="2" Content="Wpłać pieniądze" Margin="529,272,0,0" Style="{StaticResource BankButtons}" Click="DepositMoneyButton_Click"  />
+        <!--Ustaw wartość do wpłacenia slider -->
+        <Slider x:Name="DepositSlider" Grid.Column="2" HorizontalAlignment="Left" Margin="507,340,0,0" VerticalAlignment="Top" Width="156" Background="#00373737" Foreground="Black" Minimum="0"  Maximum="10000" BorderBrush="White" ValueChanged="DepositSlider_ValueChanged"   />
+        <!--Aktualna wartość do wpłacenia label -->
+        <TextBlock x:Name="DepositValue" Grid.Column="2" HorizontalAlignment="Left" Margin="577,363,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Foreground="White" FontSize="15" FontWeight="DemiBold"/>
+
 
 
     </Grid>

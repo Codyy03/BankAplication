@@ -19,6 +19,7 @@ namespace Projekt
     /// <summary>
     /// Logika interakcji dla klasy Rejestracion.xaml
     /// </summary>
+    ///  ta klasa reprezentuje wszystkie funkcjolaności sceny 'rejestracja'
     public partial class Rejestracion : Window
     {
         string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
@@ -26,7 +27,7 @@ namespace Projekt
         {
             InitializeComponent();
         }
-
+          
         private void RegistracionName_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (!char.IsLetter(e.Text, 0))
@@ -35,12 +36,13 @@ namespace Projekt
             }
         }
 
-     
+        // zmienia scene na 'logowanie'
         private void backToLogin_Click(object sender, RoutedEventArgs e)
         {
             ChangeSceneToLogin();
         }
 
+        // próba rejestracji
         private void RejestracionAttempt_Click(object sender, RoutedEventArgs e)
         {
             DatabaseManager databaseManager = new DatabaseManager(connectionString);
