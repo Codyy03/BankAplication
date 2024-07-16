@@ -83,7 +83,7 @@ namespace Projekt
             INNER JOIN wyplata ON konto.id_klienta = wyplata.id_konta
             WHERE konto.klient = '{login}'
             ORDER BY data DESC";
-
+            
             // Pobieranie danych z bazy
             var transactionsData = databaseManager.ExecuteQuery(transactionsQuery);
 
